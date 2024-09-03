@@ -19,7 +19,7 @@ public class Jogo {
             numeroJogadores = scanner.nextInt();
             scanner.nextLine();
         }
-
+ 
         List<String> cores = new ArrayList<>(Arrays.asList("preto","branco","vermelho","verde","azul","amarelo","laranja","rosa"));
 
         for(int i = 1; i <= numeroJogadores; i++){

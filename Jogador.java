@@ -5,7 +5,7 @@ public class Jogador {
     public Jogador(String nome, String cor){
         this.cor = cor;
         this.nome = nome;
-    }
+    } 
 
     public String getNome(){
         return nome;
