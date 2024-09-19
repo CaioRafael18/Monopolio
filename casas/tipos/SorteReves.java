@@ -11,4 +11,10 @@ public class SorteReves extends Casa {
     public String getTipo() {
         return "Sorte/Reves";
     }
+
+    @Override
+    public void executarAcao() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+    }
 }

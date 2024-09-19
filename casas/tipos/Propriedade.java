@@ -72,5 +72,11 @@ public class Propriedade extends Casa{
     public String getCorGrupo(){
         return corGrupo;
     }
+
+    @Override
+    public void executarAcao() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+    }
    
 }

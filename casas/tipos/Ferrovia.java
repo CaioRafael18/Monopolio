@@ -2,7 +2,7 @@ package casas.tipos;
 
 import casas.Casa;
 
-public class Ferrovia  extends Casa{
+public class Ferrovia extends Casa{
     int preco;
     int hipoteca;
     
@@ -19,5 +19,11 @@ public class Ferrovia  extends Casa{
     @Override
     public String getTipo() {
         return "Ferrovia";
+    }
+
+    @Override
+    public void executarAcao() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
     }
 }

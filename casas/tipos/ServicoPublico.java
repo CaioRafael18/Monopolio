@@ -16,4 +16,10 @@ public class ServicoPublico extends Casa {
     public String getTipo() {
         return "ServicoPublico";
     }
+
+    @Override
+    public void executarAcao() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+    }
 }

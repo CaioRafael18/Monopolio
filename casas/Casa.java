@@ -1,9 +1,12 @@
 package casas;
 
+import jogo.Jogador;
+
 public abstract class Casa {
     protected String nome;
+    private Jogador proprietario;
     protected int posicao = 0;
-
+    
     public Casa(String nome, int posicao) {
         this.nome = nome;
         this.posicao = posicao;
@@ -17,7 +20,14 @@ public abstract class Casa {
         return posicao;
     }
 
+    public Jogador getProprietario(){
+        return this.proprietario;
+    }
+
+    public void setProprietario(Jogador proprietario){
+        this.proprietario = proprietario;
+    }
+
     public abstract String getTipo();
-    // Ajustar para alguma forma fazer executar uma ação
-    // public abstract void executarAcao();
+    public abstract void executarAcao();
 }

@@ -11,4 +11,9 @@ public class Cofre extends Casa {
     public String getTipo() {
         return "Cofre";
     }
+
+    @Override
+    public void executarAcao() {
+        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+    }
 }

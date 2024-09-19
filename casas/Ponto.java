@@ -9,4 +9,7 @@ public class Ponto extends Casa {
     public String getTipo() {
         return "Ponto";
     }
+
+    @Override
+    public void executarAcao() {}
 }

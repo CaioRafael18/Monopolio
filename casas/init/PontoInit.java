@@ -8,14 +8,14 @@ import casas.pontos.PontoPartida;
 import casas.pontos.Prisao;
 
 public class PontoInit {
-    public static void iniciarPontos(ArrayList<Casa> lugares){
+    public static void iniciarPontos(ArrayList<Casa> casas){
         PontoParadaLivre paradaLivre = new PontoParadaLivre("Free Parking", 20);
         PontoPartida pontoPartida = new PontoPartida("go", 40);
         Prisao prisao = new Prisao("Jail – Just Visiting", 10);
         // VaiParaPrisao vaiParaPrisao = new VaiParaPrisao("Go to Jail", 30);
-        lugares.add(paradaLivre);
-        lugares.add(pontoPartida);
-        lugares.add(prisao);
-        // lugares.add(vaiParaPrisao);
+        casas.set(20-1, paradaLivre);
+        casas.set(40-1, pontoPartida);
+        casas.set(10-1, prisao);
+        // casas.add(vaiParaPrisao);
     }
 }

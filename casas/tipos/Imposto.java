@@ -15,4 +15,10 @@ public class Imposto extends Casa{
     public String getTipo() {
         return "Imposto";
     }
+
+    @Override
+    public void executarAcao() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+    }
 }
