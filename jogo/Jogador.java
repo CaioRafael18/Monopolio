@@ -1,6 +1,7 @@
 package jogo;
 import java.util.*;
 
+import Movimentos.MovimentoStrategy;
 import casas.Casa;
 
 public class Jogador {
@@ -9,14 +10,22 @@ public class Jogador {
     private int saldo;
     private int posicao;
     private List<Casa> propriedades;
+    private boolean estaNaPrisao;
+    private int numeroTentativas;
+    private MovimentoStrategy movimentoStrategy;
 
     public Jogador(String nome, String cor){
         this.cor = cor;
         this.nome = nome;
         this.saldo = 1500;
         this.posicao = 0;
+        this.numeroTentativas = 0;
         this.propriedades = new ArrayList<>();
     } 
+
+    public void setMovimentoStrategy(MovimentoStrategy strategy) {
+        this.movimentoStrategy = strategy;
+    }
 
     public String getNome(){
         return nome;
@@ -34,6 +43,28 @@ public class Jogador {
         return posicao;
     }
 
+    public int getNumeroTentativas(){
+        return numeroTentativas;
+    }
+
+    public void pagar(){
+        if (saldo >= 50) {
+            saldo -= 50;
+            estaNaPrisao = false;
+            numeroTentativas = 0; 
+        } else {
+            System.out.println("Saldo insuficiente!");
+        }
+    }
+
+    public void incrementaTentativas(){
+        numeroTentativas++;
+    }
+
+    public boolean estaNaPrisao() {
+        return estaNaPrisao;
+    }
+
     public List<Casa> getPropriedades(){
         return propriedades;
     }
@@ -42,12 +73,14 @@ public class Jogador {
         this.posicao = posicao;
     }
 
-    public void movimentar(int movimento, Tabuleiro tabuleiro){
-        int novaPosicao = (posicao + movimento);
-        setPosicao(novaPosicao);
-        Casa casaAtual = tabuleiro.getCasa(novaPosicao);
-        System.out.println("O peão de " + nome + " Caiu em " + casaAtual.getNome() + ".");
-        System.out.println("------------------------------------------------------------");
+    public void setEstaNaPrisao(boolean estaNaPrisao){
+        this.estaNaPrisao = estaNaPrisao;
+    }
+
+    public void movimentar(int movimento, Tabuleiro tabuleiro) {
+        if (movimentoStrategy != null) {
+            movimentoStrategy.executarMovimento(this, tabuleiro, movimento);
+        } 
     }
 }
 

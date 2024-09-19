@@ -17,7 +17,33 @@ public class JogarCommand implements Command{
         int dado1 = random.nextInt(6) + 1;
         int dado2 = random.nextInt(6) + 1;
         int movimento = dado1 + dado2;
-        System.out.println("O jogador " + jogador.getNome() + " tirou " + dado1 + "," + dado2 + " e avançou " + movimento + " Casas.");
+        if(jogador.estaNaPrisao()){
+            if (dado1 != dado2) {
+                if (dado1 == dado2) {
+                    System.out.println("O jogador " + jogador.getNome() + " tirou " + dado1 + "," + dado2 + " e conseguiu sair da prisão, avançou " + movimento + " Casas.");
+                    jogador.setEstaNaPrisao(false);
+                    jogador.setPosicao(30);
+                    jogador.movimentar(movimento, tabuleiro);
+                } else {
+                    jogador.incrementaTentativas();
+                    if (jogador.getNumeroTentativas() >= 3) {
+                        System.out.println("O jogador " + jogador.getNome() + " não conseguiu sair da prisão após 3 tentativas e terá que pagar $50.");
+                        jogador.pagar();
+                        jogador.setPosicao(30);
+                        jogador.movimentar(movimento, tabuleiro);
+                    } else {
+                        System.out.println("O jogador " + jogador.getNome() + " tirou " + dado1 + "," + dado2 + " e não conseguiu sair da prisão!");
+                    }
+                }
+            } else{
+                System.out.println("O jogador " + jogador.getNome() + " tirou " + dado1 + "," + dado2 + " e conseguiu sair da prisão, avançou " + movimento + " Casas.");
+                jogador.setEstaNaPrisao(false);
+                jogador.setPosicao(30);
+                jogador.movimentar(movimento, tabuleiro);
+            }
+        } else {
+            System.out.println("O jogador " + jogador.getNome() + " tirou " + dado1 + "," + dado2 + " e avançou " + movimento + " Casas.");
+        }
         
         jogador.movimentar(movimento, tabuleiro);
     }

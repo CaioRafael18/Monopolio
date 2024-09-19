@@ -108,6 +108,10 @@ public class Tabuleiro {
     }
 
     public Casa getCasa(int posicao){
-        return casas.get(posicao > 0 ? posicao - 1 : 0);
+        if (posicao > 0 && posicao <= casas.size()) {
+            return casas.get(posicao - 1); 
+        } else {
+            return casas.get(0); 
+        }
     }
 }

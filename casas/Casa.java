@@ -5,7 +5,7 @@ import jogo.Jogador;
 public abstract class Casa {
     protected String nome;
     private Jogador proprietario;
-    protected int posicao = 0;
+    protected int posicao;
     
     public Casa(String nome, int posicao) {
         this.nome = nome;
