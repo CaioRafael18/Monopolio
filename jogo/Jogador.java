@@ -23,8 +23,8 @@ public class Jogador {
         this.propriedades = new ArrayList<>();
     } 
 
-    public void setMovimentoStrategy(MovimentoStrategy strategy) {
-        this.movimentoStrategy = strategy;
+    public void setMovimentoStrategy(MovimentoStrategy movimentoStrategy) {
+        this.movimentoStrategy = movimentoStrategy;
     }
 
     public String getNome(){

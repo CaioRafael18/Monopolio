@@ -71,26 +71,25 @@ public class Jogo {
     private void altenarJogadores(){
         while(jogadores.size() > 1 && jogoEmAndamento){
             Jogador jogador = jogadores.get(jogadorAtual);
+            System.out.println("A jogada de " + jogador.getNome() + " começou.");
 
             if (jogador.estaNaPrisao()){
-                jogador.setMovimentoStrategy(new MovimentoPrisioneiro());
-                LidarComPrisioneiro(jogador);
-            } else{
-                jogador.setMovimentoStrategy(new MovimentoNormal());
-                System.out.println("A jogada de " + jogador.getNome() + " começou.");
+                lidarComPrisioneiro(jogador);
+            } else{ 
                 System.out.println("Comandos disponíveis: [jogar][status][sair]");
-                System.out.print("Entre com um comando: ");
-                String comando = scanner.nextLine().toLowerCase();
-                Command executarComando = comandos.get(comando);
-                verificaComandoValido(executarComando, jogador);
+                retornoComando(jogador);
             }
         }
     }
 
-    private void LidarComPrisioneiro(Jogador jogador){
-        System.out.println("A jogada de " + jogador.getNome() + " começou.");
+    private void lidarComPrisioneiro(Jogador jogador){
         System.out.println(jogador.getNome() + " está na prisão.");
         System.out.println("Comandos disponíveis: [pagar][carta][jogar][status][sair]");
+        retornoComando(jogador);
+    }
+
+    private void retornoComando(Jogador jogador){
+        System.out.print("Entre com um comando: ");
         String comando = scanner.nextLine().toLowerCase();
         Command executarComando = comandos.get(comando);
         verificaComandoValido(executarComando, jogador);

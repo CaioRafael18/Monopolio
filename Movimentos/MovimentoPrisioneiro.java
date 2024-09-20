@@ -6,15 +6,16 @@ import jogo.Tabuleiro;
 public class MovimentoPrisioneiro implements MovimentoStrategy{
     @Override
     public void executarMovimento(Jogador jogador, Tabuleiro tabuleiro, int movimento) {
-        if (jogador.getNumeroTentativas() < 3) {
-            System.out.println("O jogador " + jogador.getNome() + " não conseguiu sair da prisão!");
-            jogador.incrementaTentativas();
-        } else{
-            System.out.println(jogador.getNome() + " terá que pagar $50 para sair da Prisão.");
+        jogador.incrementaTentativas();
+
+        if (jogador.getNumeroTentativas() >= 3) {
+            System.out.println("O jogador " + jogador.getNome() + " não conseguiu sair da prisão após 3 tentativas e terá que pagar $50.");
             jogador.pagar();
+
             jogador.setEstaNaPrisao(false);
-            jogador.setPosicao(30);
-            System.out.println("O jogador " + jogador.getNome() + " conseguiu sair da prisão e avançou " + movimento + " casas.");
+            System.out.println("O jogador " + jogador.getNome() + " avançou " + movimento + " casas.");
+        } else {
+            System.out.println("O jogador " + jogador.getNome() + " não tirou dados iguais e continua preso.");
         }
     }
 }
