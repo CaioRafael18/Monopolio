@@ -1,20 +1,14 @@
 package jogo;
 import java.util.*;
 
+import cartas.Carta;
+import cartas.CartaInit;
 import casas.Casa;
-// import TiposDeCasas.Cofre;
-// import TiposDeCasas.Ferrovia;
-// import TiposDeCasas.Imposto;
-// import TiposDeCasas.ParadaLivre;
-// import TiposDeCasas.Partida;
-// import TiposDeCasas.Prisao;
-// import TiposDeCasas.Propriedade;
-// import TiposDeCasas.ServicoPublico;
-// import TiposDeCasas.SorteReves;
 import casas.repository.CasaRepository;
 
 public class Tabuleiro {
-    private List<Casa> casas;
+    private ArrayList<Casa> casas;
+    private ArrayList<Carta> cartasSorteReves = new ArrayList<>();
     
     public Tabuleiro(){
         this.casas = new ArrayList<>();
@@ -110,7 +104,8 @@ public class Tabuleiro {
     }
     
     private void inicializarTabuleiro() {
-        this.casas = CasaRepository.criarCasas();
+        this.casas = CasaRepository.criarCasas(this);
+        this.cartasSorteReves = CartaInit.CartasSorteRevesInit("./csv/sorte_reves_cartas.csv", cartasSorteReves);
     }
 
     public Casa getCasa(int posicao){
@@ -119,5 +114,9 @@ public class Tabuleiro {
         } else {
             return casas.get(0); 
         }
+    }
+
+    public ArrayList<Carta> getCartasSorteReves(){
+        return this.cartasSorteReves;
     }
 }

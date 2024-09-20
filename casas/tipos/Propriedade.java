@@ -51,7 +51,7 @@ public class Propriedade extends Casa {
             System.out.println("Essa propriedade é sua, deseja comprar um imovel ? (s/n)");
             String resposta = scanner.nextLine();
             if (resposta.equalsIgnoreCase("s") && jogador.podeComprarImovel((Propriedade) this)){
-                jogador.comparImovel((Propriedade) this);
+                jogador.adicionarCasa((Propriedade) this);
             }
         }
     }

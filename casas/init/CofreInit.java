@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import casas.Casa;
 import casas.repository.CasaRepository;
-import casas.tipos.Cofre;
+import casas.tipos.CofreComunitario;
 
 public class CofreInit extends CasaRepository {
     public static ArrayList<Casa> initCofres(String caminho, ArrayList<Casa> casas) {
@@ -18,7 +18,7 @@ public class CofreInit extends CasaRepository {
                     try {
                         int posicao = Integer.parseInt(valores[0].trim());
                         String nome = valores[1].trim();
-                        Cofre cofre = new Cofre(nome, posicao);
+                        CofreComunitario cofre = new CofreComunitario(nome, posicao);
                         casas.set(posicao-1, cofre);
                     } catch (Exception e) {
                         e.printStackTrace();

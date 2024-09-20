@@ -1,14 +1,14 @@
-package regras;
+package cartas;
 
 import jogo.Jogador;
 
-public enum RegraPagamento {
-    RECEBER {
+public enum TipoPagamentoCartaSorteReves {
+    RECEBA {
         public void executarRegra(Jogador jogador, int valor) {
             jogador.adicionarSaldo(valor);
         }
     },
-    PAGAR {
+    PAGUE {
       public void executarRegra(Jogador jogador, int valor) {
           jogador.retirarSaldo(valor);
       }

@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import casas.Casa;
 import casas.repository.CasaRepository;
 import casas.tipos.SorteReves;
+import jogo.Tabuleiro;
 
 public class SorteRevesInit extends CasaRepository {
-    public static ArrayList<Casa> initSorteReves(String caminho, ArrayList<Casa> casas) {
+    public static ArrayList<Casa> initSorteReves(String caminho, ArrayList<Casa> casas, Tabuleiro tabuleiro) {
         try (BufferedReader reader = lerCsv(caminho)) {
             String linha = reader.readLine();
             while ((linha = reader.readLine()) != null) {
@@ -18,7 +19,7 @@ public class SorteRevesInit extends CasaRepository {
                     try {
                         int posicao = Integer.parseInt(valores[0].trim());
                         String nome = valores[1].trim();
-                        SorteReves sorteReves = new SorteReves(nome, posicao);
+                        SorteReves sorteReves = new SorteReves(nome, posicao, tabuleiro);
                         casas.set(posicao-1, sorteReves);
                     } catch (Exception e) {
                         e.printStackTrace();

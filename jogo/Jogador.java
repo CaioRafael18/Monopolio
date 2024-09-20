@@ -2,18 +2,23 @@ package jogo;
 import java.util.*;
 
 import Movimentos.MovimentoStrategy;
+import casas.tipos.Ferrovia;
 import casas.tipos.Propriedade;
+import casas.tipos.ServicoPublico;
+import jogo.aquisicoes.AquisicaoFerrovia;
 import jogo.aquisicoes.AquisicaoPropriedade;
+import jogo.aquisicoes.AquisicaoServicoPublico;
 
 public class Jogador {
     private String nome;
     private String cor;
     private int saldo;
     private int posicao;
-    private List<AquisicaoPropriedade> propriedades;
+    private List<Aquisicao> propriedades;
     private boolean estaNaPrisao;
     private int numeroTentativas;
     private MovimentoStrategy movimentoStrategy;
+    private Dados dados;
 
     public Jogador(String nome, String cor){
         this.cor = cor;
@@ -26,6 +31,14 @@ public class Jogador {
 
     public void setMovimentoStrategy(MovimentoStrategy movimentoStrategy) {
         this.movimentoStrategy = movimentoStrategy;
+    }
+
+    public void setDados(Dados dados) {
+        this.dados = dados;
+    }
+
+    public Dados getDados() {
+        return this.dados;
     }
 
     public String getNome(){
@@ -50,7 +63,7 @@ public class Jogador {
 
     public void pagar(){
         if (saldo >= 50) {
-            saldo -= 50;
+            this.retirarSaldo(50);
             estaNaPrisao = false;
             numeroTentativas = 0; 
         } else {
@@ -66,7 +79,7 @@ public class Jogador {
         return estaNaPrisao;
     }
 
-    public List<AquisicaoPropriedade> getPropriedades(){
+    public List<Aquisicao> getPropriedades(){
         return propriedades;
     }
 
@@ -84,13 +97,26 @@ public class Jogador {
 
     public void comprarCasa(Propriedade casa){
         casa.setProprietario(this);
+        propriedades.add(new AquisicaoPropriedade(casa));
         retirarSaldo(casa.getPreco());
-        System.out.println(getNome()+ " comprou a " + casa.getTipo() + " " + casa.getNome() + "!!!");
+        System.out.println(getNome() + " comprou a " + casa.getTipo() + " " + casa.getNome() + "!!!");
     }
 
-    public boolean podeComprarCasa(Propriedade propriedade){
-       if(this.saldo>=propriedade.getPreco()){
-        propriedades.add(new AquisicaoPropriedade(propriedade));
+    public void comprarFerrovia(Ferrovia casa) {
+        retirarSaldo(casa.getPreco());
+        propriedades.add(new AquisicaoFerrovia(casa));
+        System.out.println(getNome() + " comprou a " + casa.getTipo() + " " + casa.getNome() + "!!!");
+    }
+
+    public void comprarServicoPublico(ServicoPublico casa){
+        retirarSaldo(casa.getPreco());
+        propriedades.add(new AquisicaoServicoPublico(casa));
+        casa.setProprietario(this);
+        System.out.println(getNome() + " comprou o " + casa.getTipo() + " " + casa.getNome() + "!!!");
+    }
+
+    public boolean podeComprarCasa(Propriedade casa){
+       if(this.saldo>=casa.getPreco()){
            return true;
        }
        return false;
@@ -103,7 +129,7 @@ public class Jogador {
         return false;
     };
 
-    public void comparImovel(Propriedade casa){
+    public void adicionarCasa(Propriedade casa){
         casa.addCasas();
         this.saldo -= casa.getPrecoCasa();
     }
@@ -111,6 +137,11 @@ public class Jogador {
     public void pagarAluguelPropriedade(Propriedade casa){
         retirarSaldo(casa.getAluguel());
         casa.getProprietario().adicionarSaldo(casa.getAluguel());
+    }
+
+    public void pagarAluguelServicoPublico(ServicoPublico casa){
+        this.retirarSaldo(casa.getPreco());
+        casa.getProprietario().adicionarSaldo(casa.getPreco());
     }
 
     public void setEstaNaPrisao(boolean estaNaPrisao){

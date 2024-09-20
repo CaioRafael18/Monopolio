@@ -13,6 +13,7 @@ import casas.init.PontoInit;
 import casas.init.PropriedadeInit;
 import casas.init.ServicoPublicoInit;
 import casas.init.SorteRevesInit;
+import jogo.Tabuleiro;
 
 public class CasaRepository {
     public static BufferedReader lerCsv(String caminho) {
@@ -25,16 +26,16 @@ public class CasaRepository {
         return reader;
     }
 
-    public static ArrayList<Casa> criarCasas() {
+    public static ArrayList<Casa> criarCasas(Tabuleiro tabuleiro) {
         ArrayList<Casa> casas = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
             casas.add(null);
         }
         PropriedadeInit.iniciarPropriedade("./csvData/propriedade.csv", casas);
-        CofreInit.initCofres("./csvData/cofres.csv", casas);
+        CofreInit.initCofres("./csvData/cofres_comunitario.csv", casas);
         FerroviasInit.initFerrovias("./csvData/ferrovias.csv", casas);
         ServicoPublicoInit.initServicoPublico("./csvData/servico_publico.csv", casas);
-        SorteRevesInit.initSorteReves("./csvData/sorte_reves.csv", casas);
+        SorteRevesInit.initSorteReves("./csvData/sorte_reves.csv", casas, tabuleiro);
         PontoInit.iniciarPontos(casas);
         ImpostoInit.initImposto(casas);
         return casas;

@@ -4,7 +4,7 @@ import casas.Casa;
 import casas.TipoImposto;
 import jogo.Jogador;
 
-public class Imposto extends Casa{
+public class Imposto extends Casa {
     private TipoImposto imposto;
 
     public Imposto(String nome, int posicao, TipoImposto imposto) {
@@ -18,20 +18,14 @@ public class Imposto extends Casa{
     }
 
     @Override
-    public void venderCasa(Jogador jogadorComprador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'venderCasa'");
-    }
+    public void venderCasa(Jogador jogadorComprador) {}
 
     @Override
-    public void ofertarVendaCasa(Jogador jogador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ofertarVendaCasa'");
-    }
+    public void ofertarVendaCasa(Jogador jogador) {}
 
     @Override
     public void executarAcao(Jogador jogador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+        System.out.println("Você caiu no imposto " + imposto.getNome() + ". Terá que pagar R$" + imposto.getValor() + " ao banco");
+        jogador.retirarSaldo(imposto.getValor());
     }
 }

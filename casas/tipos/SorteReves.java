@@ -1,11 +1,34 @@
 package casas.tipos;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import cartas.Carta;
 import casas.Casa;
 import jogo.Jogador;
+import jogo.Tabuleiro;
 
 public class SorteReves extends Casa {
-    public SorteReves(String nome, int posicao) {
+    Random random = new Random();
+    private int indiceCarta;
+    private Tabuleiro tabuleiro;
+
+    public SorteReves(String nome, int posicao, Tabuleiro tabuleiro) {
         super(nome, posicao);
+        this.tabuleiro = tabuleiro;
+    }
+
+    public void randomIndiceCarta() {
+        this.indiceCarta = random.nextInt((this.tabuleiro.getCartasSorteReves().size())-1);
+    }
+
+    public Carta pegarCarta(ArrayList<Carta> cartasSorteRevez) {     
+        randomIndiceCarta();
+        
+        Carta cartaVez = cartasSorteRevez.get(this.indiceCarta);
+        cartasSorteRevez.remove(this.indiceCarta);
+
+        return cartaVez;
     }
 
     @Override
@@ -14,20 +37,14 @@ public class SorteReves extends Casa {
     }
 
     @Override
-    public void venderCasa(Jogador jogadorComprador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'venderCasa'");
-    }
+    public void venderCasa(Jogador jogadorComprador) {}
 
     @Override
-    public void ofertarVendaCasa(Jogador jogador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ofertarVendaCasa'");
-    }
+    public void ofertarVendaCasa(Jogador jogador) {}
 
     @Override
     public void executarAcao(Jogador jogador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+        Carta carta = pegarCarta(tabuleiro.getCartasSorteReves());
+        carta.executarAcao(jogador);
     }
 }
