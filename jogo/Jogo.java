@@ -3,6 +3,7 @@ import java.util.*;
 
 import command.Command;
 import command.JogarCommand;
+import command.PagarCommand;
 import command.SairCommand;
 import command.StatusCommand;
 
@@ -26,6 +27,7 @@ public class Jogo {
         comandos.put("jogar", new JogarCommand());
         comandos.put("status", new StatusCommand());
         comandos.put("sair", new SairCommand());
+        comandos.put("pagar", new PagarCommand());
     }
 
     public void iniciarJogo(){
@@ -68,16 +70,34 @@ public class Jogo {
         while(jogadores.size() > 1 && jogoEmAndamento){
             Jogador jogador = jogadores.get(jogadorAtual);
             System.out.println("A jogada de " + jogador.getNome() + " começou.");
-            System.out.println("Comandos disponíveis: [jogar][status][sair]");
-            System.out.print("Entre com um comando: ");
-            String comando = scanner.nextLine().toLowerCase();
-            Command executarComando = comandos.get(comando);
 
-            if (executarComando != null) {
-                executarComando.executar(jogador, tabuleiro, this);
-            } else{
-                System.out.println("Comando inválido!");
+            if (jogador.estaNaPrisao()){
+                lidarComPrisioneiro(jogador);
+            } else{ 
+                System.out.println("Comandos disponíveis: [jogar][status][sair]");
+                retornoComando(jogador);
             }
+        }
+    }
+
+    private void lidarComPrisioneiro(Jogador jogador){
+        System.out.println(jogador.getNome() + " está na prisão.");
+        System.out.println("Comandos disponíveis: [pagar][carta][jogar][status][sair]");
+        retornoComando(jogador);
+    }
+
+    private void retornoComando(Jogador jogador){
+        System.out.print("Entre com um comando: ");
+        String comando = scanner.nextLine().toLowerCase();
+        Command executarComando = comandos.get(comando);
+        verificaComandoValido(executarComando, jogador);
+    }
+
+    public void verificaComandoValido(Command executarComando, Jogador jogador){
+        if (executarComando != null) {
+            executarComando.executar(jogador, tabuleiro, this);
+        } else{
+            System.out.println("Comando inválido!");
         }
     }
 

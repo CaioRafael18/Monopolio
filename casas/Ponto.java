@@ -13,20 +13,11 @@ public class Ponto extends Casa {
     }
 
     @Override
-    public void venderCasa(Jogador jogadorComprador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'venderCasa'");
-    }
+    public void venderCasa(Jogador jogadorComprador) {}
 
     @Override
-    public void ofertarVendaCasa(Jogador jogador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ofertarVendaCasa'");
-    }
+    public void ofertarVendaCasa(Jogador jogador) {}
 
     @Override
-    public void executarAcao(Jogador jogador) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
-    }
+    public void executarAcao(Jogador jogador) {}
 }

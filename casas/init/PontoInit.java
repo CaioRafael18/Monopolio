@@ -6,16 +6,17 @@ import casas.Casa;
 import casas.pontos.PontoParadaLivre;
 import casas.pontos.PontoPartida;
 import casas.pontos.Prisao;
+import casas.pontos.VaiPrisao;
 
 public class PontoInit {
     public static void iniciarPontos(ArrayList<Casa> casas){
         PontoParadaLivre paradaLivre = new PontoParadaLivre("Free Parking", 20);
         PontoPartida pontoPartida = new PontoPartida("go", 40);
-        Prisao prisao = new Prisao("Jail – Just Visiting", 10);
-        // VaiParaPrisao vaiParaPrisao = new VaiParaPrisao("Go to Jail", 30);
+        Prisao visitaPrisao = new Prisao("Jail – Just Visiting", 10);
+        VaiPrisao vaiPrisao = new VaiPrisao("Go to Jail", 30);
         casas.set(20-1, paradaLivre);
         casas.set(40-1, pontoPartida);
-        casas.set(10-1, prisao);
-        // casas.add(vaiParaPrisao);
+        casas.set(10-1, visitaPrisao);
+        casas.add(30-1, vaiPrisao);
     }
 }

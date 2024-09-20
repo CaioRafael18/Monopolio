@@ -17,8 +17,9 @@ public class Tabuleiro {
     private List<Casa> casas;
     
     public Tabuleiro(){
+        this.casas = new ArrayList<>();
         this.inicializarTabuleiro();
-        
+
         // casas = new ArrayList<>();
 
         // casas.add(new Propriedade("Mediterranean Avenue", 1, 60, 2, 10, 30, 90, 160, 250, 30, 50, "Marrom"));
@@ -101,13 +102,22 @@ public class Tabuleiro {
 
         // casas.add(new Partida("Go", 40));
 
+       
     }   
+
+    public int getQuantidadeCasas(){
+        return casas.size();
+    }
     
     private void inicializarTabuleiro() {
         this.casas = CasaRepository.criarCasas();
     }
 
     public Casa getCasa(int posicao){
-        return casas.get(posicao > 0 ? posicao - 1 : 0);
+        if (posicao > 0 && posicao <= casas.size()) {
+            return casas.get(posicao - 1); 
+        } else {
+            return casas.get(0); 
+        }
     }
 }
