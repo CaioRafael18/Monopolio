@@ -17,5 +17,6 @@ public class MovimentoPrisioneiro implements MovimentoStrategy{
         } else {
             System.out.println("O jogador " + jogador.getNome() + " não tirou dados iguais e continua preso.");
         }
+        System.out.println("------------------------------------------------------------");
     }
 }

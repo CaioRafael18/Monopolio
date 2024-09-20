@@ -103,7 +103,7 @@ public class Jogador {
         return false;
     };
 
-    public void comparImovel(Propriedade casa){
+    public void adicionarCasa(Propriedade casa){
         casa.addCasas();
         this.saldo -= casa.getPrecoCasa();
     }

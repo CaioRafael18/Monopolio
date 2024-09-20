@@ -69,6 +69,7 @@ public class Jogo {
     private void altenarJogadores(){
         while(jogadores.size() > 1 && jogoEmAndamento){
             Jogador jogador = jogadores.get(jogadorAtual);
+            System.out.println("------------------------------------------------------------");
             System.out.println("A jogada de " + jogador.getNome() + " começou.");
 
             if (jogador.estaNaPrisao()){

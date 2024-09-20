@@ -51,7 +51,7 @@ public class Propriedade extends Casa {
             System.out.println("Essa propriedade é sua, deseja comprar um imovel ? (s/n)");
             String resposta = scanner.nextLine();
             if (resposta.equalsIgnoreCase("s") && jogador.podeComprarImovel((Propriedade) this)){
-                jogador.comparImovel((Propriedade) this);
+                jogador.adicionarCasa((Propriedade) this);
             }
         }
     }
@@ -60,7 +60,6 @@ public class Propriedade extends Casa {
     public void ofertarVendaCasa(Jogador jogador) {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("A título da " + getTipo() + " " + getNome() + " está disponível por $140");
-            System.out.println(jogador.getNome() + ", você possui $" + jogador.getSaldo());
             System.out.println(jogador.getNome() + ", você possui $" + jogador.getSaldo());
             System.out.println("Você deseja comprar " + getNome() + " (s/n)");
             String resposta = scanner.nextLine().toLowerCase();

@@ -1,6 +1,7 @@
 package command;
 
 import casas.Casa;
+import jogo.Aquisicao;
 import jogo.Jogador;
 import jogo.Jogo;
 import jogo.Tabuleiro;
@@ -17,7 +18,10 @@ public class StatusCommand implements Command {
         if(jogador.getPropriedades().isEmpty()){
             System.out.println("Nenhum Título");
         } else {
-            // a fazer
+           System.out.println("Titulos: ");
+           for(Aquisicao aquisicao : jogador.getPropriedades()){
+            System.out.println("[" + aquisicao.getNome() + "] - " + aquisicao.getTipoPropriedade() + (aquisicao.getCorGrupo()) + ", aluguel " + aquisicao.getAluguel());
+           }
         }
     } 
 }
