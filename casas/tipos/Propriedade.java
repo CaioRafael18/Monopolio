@@ -1,64 +1,29 @@
 package casas.tipos;
 
-import casas.Casa;
+import java.util.Scanner;
 
-public class Propriedade extends Casa{
+import casas.Casa;
+import jogo.Jogador;
+
+public class Propriedade extends Casa {
     private String corGrupo;
     private int preco;
-    private int aluguelSemCasa;
-    private int aluguelCasa1;
-    private int aluguelCasa2;
-    private int aluguelCasa3;
-    private int aluguelCasa4;
-    private int hotel;
+    private int[] alugueis;
     private int hipoteca;
     private int precoCasa;
-
-    public Propriedade(String nome, int posicao, int preco, int aluguelSemCasa, int aluguelCasa1, int aluguelCasa2, int aluguelCasa3, int aluguelCasa4, int hotel, int hipoteca, int precoCasa, String corGrupo) {
+    private int casas;
+    
+    public Propriedade(String nome, int posicao, int preco, int[] alugueis, int hipoteca, int precoCasa, String corGrupo) {
         super(nome, posicao);
         this.preco = preco;
-        this.aluguelSemCasa = aluguelSemCasa;
-        this.aluguelCasa1 = aluguelCasa1;
-        this.aluguelCasa2 = aluguelCasa2;
-        this.aluguelCasa3 = aluguelCasa3;
-        this.aluguelCasa4 = aluguelCasa4;
-        this.hotel = hotel;
+        this.alugueis = alugueis;
         this.hipoteca = hipoteca;
         this.precoCasa = precoCasa;
         this.corGrupo = corGrupo;
     }
 
-    @Override
-    public String getTipo() {
-        return "Propriedade";
-    }
-
     public int getPreco(){
         return preco;
-    }
-
-    public int getAluguelSemCasa(){
-        return aluguelSemCasa;
-    }
-
-    public int getAluguelCasa1(){
-        return aluguelCasa1;
-    }
-
-    public int getAluguelCasa2(){
-        return aluguelCasa2;
-    }
-    
-    public int getAluguelCasa3(){
-        return aluguelCasa3;
-    }
-
-    public int getAluguelCasa4(){
-        return aluguelCasa4;
-    }
-    
-    public int getHotel(){
-        return hotel;
     }
 
     public int getHipoteca(){
@@ -73,10 +38,56 @@ public class Propriedade extends Casa{
         return corGrupo;
     }
 
-    @Override
-    public void executarAcao() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'executarAcao'");
+    public int getAluguel(){
+        return this.alugueis[this.casas];
     }
-   
+
+    public void addCasas() {
+        this.casas += 1;
+    }
+
+    public void ofertarVenderCasa(Jogador jogador){
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Essa propriedade é sua, deseja comprar um imovel ? (s/n)");
+            String resposta = scanner.nextLine();
+            if (resposta.equalsIgnoreCase("s") && jogador.podeComprarImovel((Propriedade) this)){
+                jogador.comparImovel((Propriedade) this);
+            }
+        }
+    }
+
+    @Override
+    public void ofertarVendaCasa(Jogador jogador) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("A título da " + getTipo() + " " + getNome() + " está disponível por $140");
+            System.out.println(jogador.getNome() + ", você possui $" + jogador.getSaldo());
+            System.out.println(jogador.getNome() + ", você possui $" + jogador.getSaldo());
+            System.out.println("Você deseja comprar " + getNome() + " (s/n)");
+            String resposta = scanner.nextLine().toLowerCase();
+            if (resposta.equalsIgnoreCase("s")){
+                venderCasa(jogador);
+            }
+        }
+    }
+
+    @Override
+    public void venderCasa(Jogador jogadorComprador) {
+        jogadorComprador.comprarCasa(this);
+    }
+
+    @Override
+    public String getTipo() {
+        return "Propriedade";
+    }
+
+    @Override
+    public void executarAcao(Jogador jogador) {
+        if(this.getProprietario() == null && jogador.podeComprarCasa(this)) {
+            this.ofertarVendaCasa(jogador);
+        } else if(this.getProprietario() == jogador){
+            this.ofertarVenderCasa(jogador);
+        } else if(this.getProprietario() != null && this.getProprietario() != jogador) {
+            jogador.pagarAluguelPropriedade((Propriedade) this);
+        }
+    }    
 }

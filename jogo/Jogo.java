@@ -1,8 +1,6 @@
 package jogo;
 import java.util.*;
 
-import Movimentos.MovimentoNormal;
-import Movimentos.MovimentoPrisioneiro;
 import command.Command;
 import command.JogarCommand;
 import command.PagarCommand;
