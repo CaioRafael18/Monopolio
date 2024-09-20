@@ -10,6 +10,7 @@ public abstract class Casa {
     public Casa(String nome, int posicao) {
         this.nome = nome;
         this.posicao = posicao;
+        this.proprietario = null;
     }
 
     public String getNome() {
@@ -29,5 +30,7 @@ public abstract class Casa {
     }
 
     public abstract String getTipo();
-    public abstract void executarAcao();
+    public abstract void venderCasa(Jogador jogadorComprador);
+    public abstract void ofertarVendaCasa(Jogador jogador);
+    public abstract void executarAcao(Jogador jogador);
 }
